@@ -53,7 +53,13 @@ Create a first rough class design based on the results of the object oriented an
 
 Check the implementation of the Reversi Boardgrame and describe which classes can be reused. Provide a class diagram for every class you reuse and describe if changes are required.
 
-<to be filler later>
+![Reversi UML Diagram](TicTacToe/reversi_uml.jpg)
+
+| Class    | Required Modifications |
+|:---------:|:----------:|
+| ReversiBoard    | QueryFieldState() can be reused |  
+| ReversiConsoleView    | printBoard() can be reused |
+
 
 ### 1.5 Static Polymorphism
 
