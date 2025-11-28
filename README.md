@@ -1,4 +1,9 @@
-# ASDT_2025
+# TicTacToe
+
+Learning focus:
+Class Design, Class Diagrams, Activity Diagrams, Code Reuse, Static and Dynamic Polymorphism.
+
+The task is to develop an object oriented version of the game TicTacToe.
 
 ## 1 Class Relations
 
@@ -28,13 +33,21 @@ Technical requirements
 
 From the requirements, identify the mentioned objects and describe them using the concept of OOA (object oriented analysis)
 
-<to be filled in table later>
+| Object    | Properties | Capabilities |
+|:---------:|:----------:|:------------:|
+| CGame     | has one board (Composition), has two players (Composition), knows CDisplay (Association) | It controls the game, runs the loop for the game. Gets coordinates from CPlayer -> validate pos -> update board -> if error, inform CDisplay |
+| CBoard    | creates 3x3 board | checks the coordinates, checks for winner |
+| CDisplay  | needs reference of the board | prints the board, prints ErrorCode |
+| CPlayer   | uses CBoard | selectCoordinate |
+| CHuman    | inherits CPlayer | getInput(), placesStone |
+| CComputer | inherits CPlayer | calcValidPos(), placesStone |
+| CErrorStatus | helper class  | Enum with error codes required |
 
 ### 1.3 OO Design
 
 Create a first rough class design based on the results of the object oriented analysis. You may omit the methods and attributes.
 
-<to be filled later>
+![UML Diagram](TicTacToe/UML.jpg)
 
 ### 1.4 Reuse
 
