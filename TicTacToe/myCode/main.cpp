@@ -12,7 +12,6 @@ using namespace std;
 // Main program
 int main ()
 {
-    // TODO: Add your program code here
 	cout << "TicTacToe started." << endl << endl;
 
 	return 0;
