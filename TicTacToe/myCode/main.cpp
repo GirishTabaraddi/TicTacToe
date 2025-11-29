@@ -1,18 +1,23 @@
-// Standard (system) header files
+//! Standard (system) header files
 #include <iostream>
 #include <cstdlib>
-// Add more standard header files as required
-// #include <string>
+//! Add more standard header files as required
 
 using namespace std;
 
-// Add your project's header files here
-// #include "CFraction.h"
+//! Add your project's header files here
+#include "CBoard.h"
+#include "CDisplay.h"
 
-// Main program
 int main ()
 {
 	cout << "TicTacToe started." << endl << endl;
+
+	CBoard C(3,3);
+
+	CDisplay D;
+
+	D.printBoard(C);
 
 	return 0;
 }
