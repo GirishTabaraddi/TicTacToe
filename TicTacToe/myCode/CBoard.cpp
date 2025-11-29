@@ -6,17 +6,23 @@
  */
 
 #include "CBoard.h"
-
-#include <iostream>
+#include <stdexcept>
 
 using namespace std;
 
 CBoard::CBoard(unsigned int rows, unsigned cols)
 {
-	m_rows	=	rows;
-	m_cols	=	cols;
+	if(rows == cols && rows > 2 && rows < 6 && cols > 2 && cols < 6)
+	{
+		m_rows	=	rows;
+		m_cols	=	cols;
 
-	m_board.assign(rows * cols, EBoardState::EMPTY);
+		m_board.assign(rows * cols, EBoardState::EMPTY);
+	}
+	else
+	{
+		throw std::invalid_argument("Only 3x3, 4x4, or 5x5 boards allowed.");
+	}
 }
 
 CBoard::~CBoard()
