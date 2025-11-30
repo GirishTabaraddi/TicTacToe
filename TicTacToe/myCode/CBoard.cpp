@@ -21,7 +21,7 @@ CBoard::CBoard(unsigned int rows, unsigned cols)
 	}
 	else
 	{
-		throw std::invalid_argument("Only 3x3, 4x4, or 5x5 boards allowed.");
+		throw invalid_argument("Only 3x3, 4x4, or 5x5 boards allowed.");
 	}
 }
 

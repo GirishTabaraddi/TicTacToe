@@ -6,9 +6,7 @@
  */
 
 #include "CDisplay.h"
-
 #include "CBoard.h"
-
 #include <iostream>
 
 using namespace std;

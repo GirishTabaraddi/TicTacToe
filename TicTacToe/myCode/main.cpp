@@ -9,6 +9,7 @@ using namespace std;
 #include "CBoard.h"
 #include "CDisplay.h"
 #include <memory>
+#include "CHuman.h"
 
 int main ()
 {
