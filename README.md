@@ -47,13 +47,13 @@ From the requirements, identify the mentioned objects and describe them using th
 
 Create a first rough class design based on the results of the object oriented analysis. You may omit the methods and attributes.
 
-![UML Diagram](TicTacToe/UML.jpg)
+![UML Diagram](TicTacToe/UML&Doxygen/UML.jpg)
 
 ### 1.4 Reuse
 
 Check the implementation of the Reversi Boardgrame and describe which classes can be reused. Provide a class diagram for every class you reuse and describe if changes are required.
 
-![Reversi UML Diagram](TicTacToe/reversi_uml.jpg)
+![Reversi UML Diagram](TicTacToe/UML&Doxygen/reversi_uml.jpg)
 
 | Class    | Required Modifications |
 |:---------:|:----------:|
