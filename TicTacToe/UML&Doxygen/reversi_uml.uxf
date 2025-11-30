@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>250</x>
+      <y>50</y>
+      <w>450</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>ReversiConsoleView
+--
+- m_rows: int
+- m_columns: int
+- m_board: ReversiBoard*
+--
++ ReversiConsoleView(RBObj: ReversiBoard*, rows: int, columns: int)
++ PrintBoard(): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>210</x>
+      <y>320</y>
+      <w>540</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>ReversiBoard
+--
+- m_rows: int
+- m_columns: int
+- m_board: char*
+--
++ ReversiBoard(rows: int, columns: int)
++ ~ReversiBoard()
++ QueryFieldState(rows: int, columns: int): field_state_t
++ SetFieldState(player: char, rows: int, columns: int, availableStatesArray: int*): RC_t
++ AvailableFieldStates(player: char): int*
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>460</x>
+      <y>160</y>
+      <w>50</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m2=0..1
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;160.0</additional_attributes>
+  </element>
+</diagram>
