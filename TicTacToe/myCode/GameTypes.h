@@ -28,4 +28,11 @@ inline EBoardState toLowerCase(EBoardState symbol)
 	else return EBoardState::EMPTY;
 }
 
+enum class EGameType
+{
+	HvH,
+	HvC,
+	CvC
+};
+
 #endif /* GAMETYPES_H_ */

@@ -28,6 +28,8 @@ public:
 	virtual ~CPlayer();
 
 	virtual Coordinates decideMove(const CBoard& board) = 0;
+
+	EBoardState getSymbol() const;
 };
 
 #endif /* CPLAYER_H_ */

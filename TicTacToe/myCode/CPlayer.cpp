@@ -31,3 +31,7 @@ CPlayer::~CPlayer()
 
 }
 
+EBoardState CPlayer::getSymbol() const
+{
+	return m_symbol;
+}
