@@ -36,6 +36,15 @@ public:
 	unsigned int getCols() const;
 
 	EBoardState getCellValue(unsigned int row, unsigned int col) const;
+
+	void setCellValue(unsigned int row, unsigned int col, EBoardState value);
+
+	EGameResult checkWinStatus();
+
+private:
+	EGameResult checkAllRows();
+	EGameResult checkAllCols();
+	EGameResult checkAllDiagonals();
 };
 
 #endif /* CBOARD_H_ */

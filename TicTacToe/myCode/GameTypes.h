@@ -35,4 +35,12 @@ enum class EGameType
 	CvC
 };
 
+enum class EGameResult
+{
+	PLAYING,
+	X_WINS,
+	O_WINS,
+	DRAW
+};
+
 #endif /* GAMETYPES_H_ */

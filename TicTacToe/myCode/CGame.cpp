@@ -91,6 +91,8 @@ void CGame::playGame()
 
 void CGame::m_switchPlayer()
 {
+	if(m_currentPlayerIdx == 0) m_currentPlayerIdx = 1;
+	else m_currentPlayerIdx = 0;
 }
 
 
