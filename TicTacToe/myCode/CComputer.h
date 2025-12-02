@@ -16,6 +16,12 @@ public:
 	CComputer(EBoardState symbol);
 	virtual ~CComputer();
 	virtual Coordinates decideMove(const CBoard &board) override;
+	virtual std::string getPlayerType() const override;
+
+private:
+	int m_findOptimalCellValue(CBoard& board, unsigned int depth, bool checkTurn);
+
+	EBoardState getOpponentSymbol() const;
 };
 
 #endif /* CCOMPUTER_H_ */

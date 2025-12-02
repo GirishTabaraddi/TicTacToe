@@ -30,6 +30,8 @@ public:
 	virtual Coordinates decideMove(const CBoard& board) = 0;
 
 	EBoardState getSymbol() const;
+
+	virtual std::string getPlayerType() const = 0;
 };
 
 #endif /* CPLAYER_H_ */

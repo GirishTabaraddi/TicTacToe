@@ -30,12 +30,14 @@ public:
 
 	unsigned int getCurrentPlayerIdx() const;
 
+	void printPlayerInfo() const;
+
 private:
 	void m_switchPlayer();
 
 	void m_symbolInit(EGameType gameType);
 
-	void m_checkResult();
+	void m_checkResult(CPlayer *currentPlayer);
 };
 
 #endif /* CGAME_H_ */

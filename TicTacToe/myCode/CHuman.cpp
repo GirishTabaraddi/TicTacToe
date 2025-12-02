@@ -81,3 +81,8 @@ Coordinates CHuman::decideMove(const CBoard &board)
 
 	return tempCoordinates;
 }
+
+std::string CHuman::getPlayerType() const
+{
+	return "Human";
+}
