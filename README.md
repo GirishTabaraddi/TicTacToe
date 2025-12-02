@@ -103,7 +103,7 @@ Draw the corresponding class diagram.
 
 Draw an activity diagram describing the top level placeStone-Strategy for the computer player.
 
-![UML Diagram](TicTacToe/UML/ActivityDiagram_ComputerAlgorithm.PNG)
+![UML Diagram](TicTacToe/UML/ActivityDiagram_ComputerAlgorithm.png)
 
 ### 2.2 Spooky Hierarchy
 
