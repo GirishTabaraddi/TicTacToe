@@ -9,9 +9,9 @@ The task is to develop an object oriented version of the game TicTacToe.
 
 ### 1.1 Requirements
 
-Your task is to develop a console based version of the board game TicTacToe
+The task is to develop a console based version of the board game TicTacToe
 
-- The game consists of a 3x3 board.
+- The game consists of a 3x3/4x4/5x5 board.
 - On every position, the players place a “x” (player 1) or a “o” (Player 2) stone.
 - The first player, who has 3 stones in a row (horizontally, vertically or diagonally) wins the game.
 
@@ -27,7 +27,7 @@ Technical requirements
 - The computer may never loose.
 - The board will be displayed as a console application.
 - Displaying the screen later on in a graphical format shall be easily supported.
-- Provide DoxyGen Style comments for all entities and create a website for your project, which shall also be uploaded.
+- Provide DoxyGen Style comments for all entities and create a website for your project.
 
 ### 1.2 OO Analysis
 
@@ -45,7 +45,7 @@ From the requirements, identify the mentioned objects and describe them using th
 
 ### 1.3 OO Design
 
-Create a first rough class design based on the results of the object oriented analysis. You may omit the methods and attributes.
+Create a first rough class design based on the results of the object oriented analysis. Methods and attributes can be ommitted.
 
 ![UML Diagram](TicTacToe/UML&Doxygen/UML.jpg)
 
@@ -129,55 +129,92 @@ Using these concepts, describe how you can implement the following feature:
 
 ## 3 Implementation and Test
 
-Implement the polymorph design and test the code.
+### 3.1 Final UML Design of the Game
 
-Alternatively, you may also implement the static design, which however reduces the implementation points to 2 max.
+![UML Diagram](TicTacToe/UML&Doxygen/Final_UML.jpg)
 
-The output should look similar to (Debug message are optional):
+### 3.2 Output of the game
 
 ```
-Select player: 1 (1 - human, 2 - computer) : 2
-Computer Player selected
-Select player: 2 (1 - human, 2 - computer) : 2
-Computer Player selected
-Placing a stone in round 1
-. . .
-. x .
-. . .
-Placing a stone in round 2
-o . .
-. x .
-. . .
-Placing a stone in round 3
-o . .
-. x .
-x . .
-Placing a stone in round 4
-Found defense diagonal: (0, 2)
-o . o
-. x .
-x . .
-Placing a stone in round 5
-Found defense row: (0, 1)
-o x o
-. x .
-x . .
-Placing a stone in round 6
-Found defense column: (2, 1)
-o x o
-. x .
-x o .
-Placing a stone in round 7
-o x o
-. x .
-x o x
-Placing a stone in round 8
-o x o
-o x .
-x o x
-Placing a stone in round 9
-o x o
-o x x
-x o x
-Draw....
+TicTacToe started.
+
+Choose the Game Type from below options: 
+1. Human vs Human
+2. Human vs Computer
+3. Computer vs Computer
+3
+Enter TicTacToe Board Size (3, 4, or 5): 3
+
+----------- Game Configuration -----------
+
+Type: Computer vs Computer
+
+Grid: 3x3
+
+Player-0: Computer (o)
+
+Player-1: Computer (x)
+---------------------------------------
+
+. . . 
+. . . 
+. . . 
+
+Player-1 x (Computer) turn:
+
+x . . 
+. . . 
+. . . 
+
+Player-0 o (Computer) turn:
+
+x . . 
+. o . 
+. . . 
+
+Player-1 x (Computer) turn:
+
+x x . 
+. o . 
+. . . 
+
+Player-0 o (Computer) turn:
+
+x x o 
+. o . 
+. . . 
+
+Player-1 x (Computer) turn:
+
+x x o 
+. o . 
+x . . 
+
+Player-0 o (Computer) turn:
+
+x x o 
+o o . 
+x . . 
+
+Player-1 x (Computer) turn:
+
+x x o 
+o o x 
+x . . 
+
+Player-0 o (Computer) turn:
+
+x x o 
+o o x 
+x o . 
+
+Player-1 x (Computer) turn:
+
+x x o 
+o o x 
+x o x 
+
+Unfortunately it is a draw!!!
+
+Game Ended!!!
 ```
