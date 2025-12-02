@@ -10,7 +10,7 @@
 
 #include "CPlayer.h"
 
-/**
+/*!
  * @class CHuman
  * @brief Represents a human player in the Tic-Tac-Toe game.
  * * This class handles interaction with the user via the console, asking for
@@ -19,18 +19,18 @@
 class CHuman: public CPlayer
 {
 public:
-    /**
+    /*!
      * @brief Constructs a Human player.
      * @param symbol The symbol (X or O) assigned to this player.
      */
     CHuman(EBoardState symbol);
 
-    /**
+    /*!
      * @brief Virtual destructor to ensure proper cleanup of derived resources.
      */
     virtual ~CHuman();
 
-    /**
+    /*!
      * @brief Prompts the user via console to select a move.
      * * Handles input validation (checking for non-numbers) and logic validation
      * (checking boundaries and checking if the cell is already occupied).
@@ -39,7 +39,7 @@ public:
      */
     virtual Coordinates decideMove(const CBoard &board) override;
 
-    /**
+    /*!
      * @brief Returns the description of the player type.
      * @return std::string "Human"
      */

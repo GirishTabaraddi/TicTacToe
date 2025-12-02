@@ -1,6 +1,7 @@
 # TicTacToe
 
-Learning focus:
+**Learning focus:**
+
 Class Design, Class Diagrams, Activity Diagrams, Code Reuse, Static and Dynamic Polymorphism.
 
 The task is to develop an object oriented version of the game TicTacToe.
@@ -102,7 +103,7 @@ Draw the corresponding class diagram.
 
 Draw an activity diagram describing the top level placeStone-Strategy for the computer player.
 
-<to be drawn>
+![UML Diagram](TicTacToe/UML&Doxygen/ActivityDiagram_ComputerAlgorithm.PNG)
 
 ### 2.2 Spooky Hierarchy
 
@@ -110,15 +111,153 @@ After spending a frustratingly large number of hours for creating the first desi
 
 ![UML Diagram](TicTacToe/UML&Doxygen/nellynerd_UML.png)
 
-Explain the following programming concepts (check with cplusplus.com or use a good textbook)
 
-Friend Class:
+#### Friend Class
 
-Static Attribute:
+A **Friend Class** is a class that is granted special access to the **private** and **protected** members of another class. Under normal object-oriented rules, private data is hidden from outside classes. However, if Class A declares Class B as a `friend`, Class B can access Class A's private variables and functions.
 
-Static Method:
+**Key Characteristics:**
+* **Not Symmetric:** If A is a friend of B, B is not automatically a friend of A.
+* **Not Transitive:** If A is a friend of B, and B is a friend of C, A is *not* automatically a friend of C.
+* **Not Inherited:** Friendships are not passed down to derived classes.
 
-Throwing and Catching Exceptions:
+**Syntax:**
+
+```
+class CStorage {
+private:
+    int m_secretData = 42;
+
+    // CStorage gives permission to CDisplay
+    friend class CDisplay; 
+};
+
+class CDisplay {
+public:
+    void printSecret(const CStorage& storage) {
+        // This works only because CDisplay is a friend!
+        std::cout << storage.m_secretData << std::endl; 
+    }
+};
+```
+
+#### Static Attribute (Static Data Member)
+
+A **Static Attribute** is a variable that belongs to the **class itself**, rather than to any specific object (instance) of that class. No matter how many objects of the class you create, there is only **one copy** of the static variable in memory. All objects share this single variable.
+
+**Key Rules:**
+  * **Shared Memory:** Changing the value in one object changes it for all objects.
+  * **Initialization:** Static members must be defined and initialized **outside** the class definition (usually in the `.cpp` file) to allocate memory.
+  * **Lifetime:** It exists for the entire duration of the program, initialized before `main()` runs.
+
+**Syntax:**
+
+```
+#include <iostream>
+
+class Counter {
+public:
+    // Declaration inside the class
+    static int objectCount; 
+
+    Counter() {
+        objectCount++; // Increment shared counter every time an object is born
+    }
+};
+
+// Definition and Initialization OUTSIDE the class (Critical Step)
+int Counter::objectCount = 0;
+
+int main() {
+    Counter c1;
+    Counter c2;
+    Counter c3;
+
+    // Accessed via Class Name (preferred) or Object
+    std::cout << "Total objects created: " << Counter::objectCount << std::endl; 
+    // Output: Total objects created: 3
+    return 0;
+}
+```
+
+#### Static Method
+
+A **Static Method** is a function that belongs to the class rather than an instance. It can be called without creating an object of the class.
+
+**Key Rules:**
+  * **No `this` Pointer:** Since it is not attached to an object, it does not have a `this` pointer.
+  * **Limited Access:** A static method can **only** access **Static Attributes** or call other **Static Methods**. It cannot access non-static (regular) member variables because it doesn't know which object's data to look at.
+  * **Invocation:** Called using the scope resolution operator `ClassName::MethodName()`.
+
+**Syntax:**
+
+```
+#include <iostream>
+
+class MathUtils {
+public:
+    static int add(int a, int b) {
+        return a + b;
+    }
+
+    // This method cannot access non-static variables!
+};
+
+int main() {
+    // No need to create 'MathUtils m;' 
+    // We call the function directly on the class.
+    int result = MathUtils::add(10, 5);
+    
+    std::cout << "Result: " << result << std::endl; // Output: Result: 15
+    return 0;
+}
+```
+#### Throwing and Catching Exceptions
+
+Exception handling provides a way to transfer control from one part of a program to another when an error or "exceptional" situation occurs. It separates error-handling code from normal program logic.
+
+**Keywords:**
+  * **`try`**: A block of code where exceptions might occur.
+  * **`throw`**: Used to signal that an error has occurred. You can throw integers, strings, or objects (like `std::exception`).
+  * **`catch`**: A block of code that handles the specific exception thrown.
+
+**Key Rules:**
+  * **Stack Unwinding:** When an exception is thrown, the program leaves the current scope immediately. Local objects are destroyed (destructors are called) as the program looks for a `catch` block.
+  * **Handlers:** You can have multiple `catch` blocks for different types of errors. `catch(...)` catches anything.
+
+**Syntax:**
+
+```
+#include <iostream>
+#include <stdexcept> // Standard exceptions
+
+double divide(double numerator, double denominator) {
+    if (denominator == 0) {
+        // Signal an error
+        throw std::invalid_argument("Error: Division by zero is not allowed.");
+    }
+    return numerator / denominator;
+}
+
+int main() {
+    try {
+        // Attempt risky code
+        double result = divide(10.0, 0.0);
+        std::cout << "Result: " << result << std::endl;
+    } 
+    catch (const std::invalid_argument& e) {
+        // Handle the specific error caught
+        std::cerr << "Caught Exception: " << e.what() << std::endl;
+    }
+    catch (...) {
+        // Handle any other unknown error
+        std::cerr << "Caught unknown error." << std::endl;
+    }
+
+    std::cout << "Program continues..." << std::endl;
+    return 0;
+}
+```
 
 Using these concepts, describe how you can implement the following feature:
 

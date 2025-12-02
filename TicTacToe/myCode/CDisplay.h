@@ -13,7 +13,7 @@
 //! Forward declaration allows CDisplay to compile without the full CBoard definition.
 class CBoard;
 
-/**
+/*!
  * @class CDisplay
  * @brief The "View" class responsible for rendering game information to the console.
  * * This class handles all standard output operations, including drawing the
@@ -22,17 +22,17 @@ class CBoard;
 class CDisplay
 {
 public:
-    /**
+    /*!
      * @brief Default Constructor.
      */
     CDisplay();
 
-    /**
+    /*!
      * @brief Virtual Destructor.
      */
     virtual ~CDisplay();
 
-    /**
+    /*!
      * @brief Renders the current state of the board to the standard output.
      * * This function iterates through the CBoard object and prints the
      * corresponding symbols (X, O, or .) in a grid format.

@@ -11,7 +11,7 @@
 #include <cctype>
 #include <iostream>
 
-/**
+/*!
  * @brief Represents the state of a single cell on the Tic-Tac-Toe board.
  * * This enum class inherits from char to facilitate easy printing to the console.
  */
@@ -25,7 +25,7 @@ enum class EBoardState : char
     O       =   'o'
 };
 
-/**
+/*!
  * @brief Utility function to normalize board symbols to lowercase.
  * * This ensures that if a user or system passes uppercase 'X' or 'O',
  * it is correctly converted to the standard EBoardState values.
@@ -43,7 +43,7 @@ inline EBoardState toLowerCase(EBoardState symbol)
     else return EBoardState::EMPTY;
 }
 
-/**
+/*!
  * @brief Defines the available game modes.
  */
 enum class EGameType
@@ -56,7 +56,7 @@ enum class EGameType
     CvC
 };
 
-/**
+/*!
  * @brief Represents the current status or final result of the game.
  */
 enum class EGameResult
@@ -71,7 +71,7 @@ enum class EGameResult
     DRAW
 };
 
-/**
+/*!
  * @brief Overloaded stream insertion operator for EBoardState.
  * * Allows direct printing of enum values to streams (e.g., cout << EBoardState::X).
  * * @param lhs The output stream (e.g., std::cout).

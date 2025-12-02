@@ -13,7 +13,7 @@
 //! Forward declaration for CPlayer usage
 class CBoard;
 
-/**
+/*!
  * @struct Coordinates
  * @brief A structure to transport row and column indices.
  * * Used primarily as the return type for player move decisions.
@@ -27,7 +27,7 @@ struct Coordinates
     unsigned int col;
 };
 
-/**
+/*!
  * @class CPlayer
  * @brief Abstract Base Class representing a participant in the game.
  * * This class defines the interface for any entity that can play Tic-Tac-Toe,
@@ -37,7 +37,7 @@ struct Coordinates
 class CPlayer
 {
 protected:
-    /**
+    /*!
      * @brief Stores the symbol assigned to this player.
      * Protected visibility allows derived classes (CHuman/CComputer)
      * to access it if necessary for logic checks.
@@ -45,20 +45,20 @@ protected:
     EBoardState m_symbol;
 
 public:
-    /**
+    /*!
      * @brief Constructor.
      * @param symbol The specific token (X or O) this player will use throughout the game.
      */
     CPlayer(EBoardState symbol);
 
-    /**
+    /*!
      * @brief Virtual Destructor.
      * Essential for Dynamic Polymorphism to ensure the derived class
      * destructor is called when deleting a CPlayer pointer.
      */
     virtual ~CPlayer();
 
-    /**
+    /*!
      * @brief Calculates or retrieves the coordinates for the next move.
      * * This is a Pure Virtual Function that must be implemented by derived classes.
      * - For CHuman: It prompts the user for input via cin.
@@ -69,13 +69,13 @@ public:
      */
     virtual Coordinates decideMove(const CBoard& board) = 0;
 
-    /**
+    /*!
      * @brief Accessor for the player's assigned symbol.
      * @return EBoardState The enum value (X or O) belonging to this player.
      */
     EBoardState getSymbol() const;
 
-    /**
+    /*!
      * @brief Identifies the type of player for UI display.
      * @return std::string A textual description (e.g., "Human" or "Computer").
      */

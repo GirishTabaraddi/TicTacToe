@@ -11,7 +11,7 @@
 #include <vector>
 #include "GameTypes.h"
 
-/**
+/*!
  * @class CBoard
  * @brief Represents the Tic-Tac-Toe game board data and logic.
  *
@@ -28,7 +28,7 @@ private:
 	/*!< The number of columns in the grid. */
 	unsigned int m_cols;
 
-	/**
+	/*!
 	 * @brief The internal data structure for the grid.
 	 * @details A 1D vector representing the 2D board.
 	 * Mapping formula: Index = (Row * m_cols) + Col.
@@ -36,7 +36,7 @@ private:
 	std::vector<EBoardState> m_board;
 
 public:
-	/**
+	/*!
 	 * @brief Parameterized Constructor.
 	 * * Initializes the board dimensions and allocates the vector memory
 	 * initialized to EBoardState::EMPTY.
@@ -47,26 +47,26 @@ public:
 	 */
 	CBoard(unsigned int rows, unsigned cols);
 
-	/**
+	/*!
 	 * @brief Destructor.
 	 * * Handles clean-up of the CBoard object.
 	 * * std::vector manages its own memory automatically.
 	 */
 	virtual ~CBoard();
 
-	/**
+	/*!
 	 * @brief Getter for the number of rows.
 	 * @return The unsigned integer representing total rows.
 	 */
 	unsigned int getRows() const;
 
-	/**
+	/*!
 	 * @brief Getter for the number of columns.
 	 * @return The unsigned integer representing total columns.
 	 */
 	unsigned int getCols() const;
 
-	/**
+	/*!
 	 * @brief Retrieves the state of a specific cell.
 	 * * Converts the 2D (row, col) coordinates into the 1D vector index
 	 * to fetch the data.
@@ -77,7 +77,7 @@ public:
 	 */
 	EBoardState getCellValue(unsigned int row, unsigned int col) const;
 
-	/**
+	/*!
 	 * @brief Places a move on the board.
 	 * * Updates the internal vector with the player's move.
 	 *
@@ -88,7 +88,7 @@ public:
 	 */
 	void setCellValue(unsigned int row, unsigned int col, EBoardState value);
 
-	/**
+	/*!
 	 * @brief Clears a specific cell back to EMPTY.
 	 * * This is primarily used by the CComputer to "undo"
 	 * temporary moves during calculation.
@@ -98,7 +98,7 @@ public:
 	 */
 	void resetCellValue(unsigned int row, unsigned int col);
 
-	/**
+	/*!
 	 * @brief Analyzes the board for a winner or draw.
 	 * * Aggregates results from row, column, and diagonal checks.
 	 *
@@ -107,19 +107,19 @@ public:
 	EGameResult checkWinStatus();
 
 private:
-	/**
+	/*!
 	 * @brief Helper function to check all rows for a winning line.
 	 * @return The result if a row win is found, otherwise PLAYING.
 	 */
 	EGameResult checkAllRows();
 
-	/**
+	/*!
 	 * @brief Helper function to check all columns for a winning line.
 	 * @return The result if a column win is found, otherwise PLAYING.
 	 */
 	EGameResult checkAllCols();
 
-	/**
+	/*!
 	 * @brief Helper function to check both Main and Anti diagonals.
 	 * @return The result if a diagonal win is found, otherwise PLAYING.
 	 */
