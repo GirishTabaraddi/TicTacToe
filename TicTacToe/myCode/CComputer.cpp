@@ -27,24 +27,28 @@ Coordinates CComputer::decideMove(const CBoard &board)
 
 	Coordinates tempCoordinates;
 
-	bool isOccupied;
-
-	tempRow = rand() % board.getRows();
-	tempCol = rand() % board.getRows();
+	bool isOccupied = false;
 
 	do
 	{
-		isOccupied = false;
+		tempRow = rand() % board.getRows();
+		tempCol = rand() % board.getRows();
 
 		if(board.getCellValue(tempRow, tempCol) != EBoardState::EMPTY)
 		{
 			isOccupied = true;
 			continue;
 		}
+		else isOccupied = false;
 	}while(isOccupied);
 
 	tempCoordinates.row = tempRow;
 	tempCoordinates.col = tempCol;
 
 	return tempCoordinates;
+}
+
+std::string CComputer::getPlayerType() const
+{
+	return "Computer";
 }

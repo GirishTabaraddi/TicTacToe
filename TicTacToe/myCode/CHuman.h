@@ -16,6 +16,7 @@ public:
 	CHuman(EBoardState symbol);
 	virtual ~CHuman();
 	virtual Coordinates decideMove(const CBoard &board) override;
+	virtual std::string getPlayerType() const override;
 };
 
 #endif /* CHUMAN_H_ */

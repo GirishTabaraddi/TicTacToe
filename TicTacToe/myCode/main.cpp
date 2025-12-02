@@ -98,14 +98,15 @@ void startTicTacToe()
 		}
 	}
 
-	cout << endl << "----------- Game Configured -----------" << endl << endl;
+	cout << endl << "----------- Game Configuration -----------" << endl << endl;
 	cout << "Type: ";
 	switch(gameType) {
-		case EGameType::HvH: cout << "Human vs Human"; break;
-		case EGameType::HvC: cout << "Human vs Computer"; break;
-		case EGameType::CvC: cout << "Computer vs Computer"; break;
+		case EGameType::HvH: cout << "Human vs Human" << endl; break;
+		case EGameType::HvC: cout << "Human vs Computer" << endl; break;
+		case EGameType::CvC: cout << "Computer vs Computer" << endl; break;
 	}
-	cout << endl << "Grid: " << boardSize << "x" << boardSize << endl << endl;
+	cout << endl << "Grid: " << boardSize << "x" << boardSize << endl;
+	game->printPlayerInfo();
 	cout << "---------------------------------------" << endl << endl;
 
 	if(game != nullptr)

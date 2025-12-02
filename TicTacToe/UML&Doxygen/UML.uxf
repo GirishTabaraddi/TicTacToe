@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>170</x>
-      <y>80</y>
+      <y>50</y>
       <w>200</w>
       <h>90</h>
     </coordinates>
@@ -22,7 +22,7 @@ printErrorStatus()
     <id>UMLClass</id>
     <coordinates>
       <x>480</x>
-      <y>90</y>
+      <y>60</y>
       <w>200</w>
       <h>90</h>
     </coordinates>
@@ -38,7 +38,7 @@ GameControlLoop()
     <id>UMLClass</id>
     <coordinates>
       <x>340</x>
-      <y>250</y>
+      <y>220</y>
       <w>200</w>
       <h>100</h>
     </coordinates>
@@ -54,7 +54,7 @@ checkWinner()</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>630</x>
-      <y>350</y>
+      <y>320</y>
       <w>200</w>
       <h>80</h>
     </coordinates>
@@ -69,7 +69,7 @@ selectCoordinate()</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>510</x>
-      <y>500</y>
+      <y>470</y>
       <w>200</w>
       <h>120</h>
     </coordinates>
@@ -87,7 +87,7 @@ placeStone()</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>760</x>
-      <y>500</y>
+      <y>470</y>
       <w>200</w>
       <h>120</h>
     </coordinates>
@@ -102,25 +102,10 @@ placeStone()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>200</x>
-      <y>460</y>
-      <w>200</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>CErrorStatus
---
-
---
-enumErrorStatus</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
       <x>400</x>
-      <y>120</y>
+      <y>90</y>
       <w>100</w>
       <h>150</h>
     </coordinates>
@@ -133,7 +118,7 @@ m2=1
     <id>Relation</id>
     <coordinates>
       <x>360</x>
-      <y>100</y>
+      <y>70</y>
       <w>140</w>
       <h>40</h>
     </coordinates>
@@ -145,7 +130,7 @@ m1=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>600</x>
-      <y>420</y>
+      <y>390</y>
       <w>140</w>
       <h>100</h>
     </coordinates>
@@ -156,7 +141,7 @@ m1=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>710</x>
-      <y>420</y>
+      <y>390</y>
       <w>160</w>
       <h>100</h>
     </coordinates>
@@ -167,7 +152,7 @@ m1=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>580</x>
-      <y>170</y>
+      <y>140</y>
       <w>170</w>
       <h>200</h>
     </coordinates>
@@ -180,7 +165,7 @@ m2=1
     <id>Relation</id>
     <coordinates>
       <x>240</x>
-      <y>160</y>
+      <y>130</y>
       <w>120</w>
       <h>160</h>
     </coordinates>
@@ -190,41 +175,8 @@ m2=1
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>210</x>
-      <y>160</y>
-      <w>100</w>
-      <h>320</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>80.0;300.0;80.0;190.0;10.0;190.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>300</x>
-      <y>340</y>
-      <w>160</w>
-      <h>140</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;120.0;10.0;30.0;140.0;30.0;140.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>130</x>
-      <y>40</y>
-      <w>470</w>
-      <h>470</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>70.0;450.0;10.0;450.0;10.0;10.0;450.0;10.0;450.0;50.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
       <x>450</x>
-      <y>340</y>
+      <y>310</y>
       <w>200</w>
       <h>70</h>
     </coordinates>

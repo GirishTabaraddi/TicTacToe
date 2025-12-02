@@ -11,20 +11,21 @@
 
 using namespace std;
 
-CGame::CGame(unsigned int boardSize, EGameType gameType):m_board(boardSize, boardSize)
+CGame::CGame(unsigned int boardSize, EGameType gameType) :
+		m_board(boardSize, boardSize)
 {
 	m_symbolInit(gameType);
 
-	if(m_players[0]->getSymbol() == EBoardState::X)
+	if (m_players[0]->getSymbol() == EBoardState::X)
 	{
-		m_currentPlayerIdx	=	0;
+		m_currentPlayerIdx = 0;
 	}
 	else
 	{
-		m_currentPlayerIdx	=	1;
+		m_currentPlayerIdx = 1;
 	}
 
-	m_isRunning	=	true;
+	m_isRunning = true;
 }
 
 CGame::~CGame()
@@ -42,10 +43,10 @@ void CGame::m_symbolInit(EGameType gameType)
 {
 	unsigned int coinToss = rand() % 2;
 
-	switch(gameType)
+	switch (gameType)
 	{
 	case EGameType::HvH:
-		if(coinToss == 0)
+		if (coinToss == 0)
 		{
 			m_players[0] = new CHuman(EBoardState::X);
 			m_players[1] = new CHuman(EBoardState::O);
@@ -57,7 +58,7 @@ void CGame::m_symbolInit(EGameType gameType)
 		}
 		break;
 	case EGameType::HvC:
-		if(coinToss == 0)
+		if (coinToss == 0)
 		{
 			m_players[0] = new CHuman(EBoardState::X);
 			m_players[1] = new CComputer(EBoardState::O);
@@ -69,7 +70,7 @@ void CGame::m_symbolInit(EGameType gameType)
 		}
 		break;
 	case EGameType::CvC:
-		if(coinToss == 0)
+		if (coinToss == 0)
 		{
 			m_players[0] = new CComputer(EBoardState::X);
 			m_players[1] = new CComputer(EBoardState::O);
@@ -88,15 +89,17 @@ void CGame::m_symbolInit(EGameType gameType)
 
 void CGame::m_switchPlayer()
 {
-	if(m_currentPlayerIdx == 0) m_currentPlayerIdx = 1;
-	else m_currentPlayerIdx = 0;
+	if (m_currentPlayerIdx == 0)
+		m_currentPlayerIdx = 1;
+	else
+		m_currentPlayerIdx = 0;
 }
 
 void CGame::m_checkResult()
 {
 	EGameResult resultStatus = m_board.checkWinStatus();
 
-	switch(resultStatus)
+	switch (resultStatus)
 	{
 	case EGameResult::X_WINS:
 		m_display.printBoard(m_board);
@@ -121,23 +124,36 @@ void CGame::m_checkResult()
 
 void CGame::playGame()
 {
-	while(m_isRunning)
+	while (m_isRunning)
 	{
 		m_display.printBoard(m_board);
 
-		CPlayer* currentPlayer = m_players[m_currentPlayerIdx];
+		CPlayer *currentPlayer = m_players[m_currentPlayerIdx];
 
-		cout << endl << "Player " << currentPlayer->getSymbol() << "'s turn." << endl;
+		cout << endl << "Player " << currentPlayer->getSymbol() <<
+				" (" << currentPlayer->getPlayerType() << ") turn:" << endl << endl;
 
-		Coordinates currentPlayerCoordinates = currentPlayer->decideMove(m_board);
+		Coordinates currentPlayerCoordinates = currentPlayer->decideMove(
+				m_board);
 
-		m_board.setCellValue(currentPlayerCoordinates.row, currentPlayerCoordinates.col, currentPlayer->getSymbol());
+		m_board.setCellValue(currentPlayerCoordinates.row,
+				currentPlayerCoordinates.col, currentPlayer->getSymbol());
 
 		m_checkResult();
 
-		if(m_isRunning)
+		if (m_isRunning)
 		{
 			m_switchPlayer();
 		}
+	}
+}
+
+void CGame::printPlayerInfo() const
+{
+	for (unsigned int i = 0; i < 2; i++)
+	{
+		cout << endl << "Player " << i << ": " << m_players[i]->getPlayerType()
+				<< " (" << m_players[i]->getSymbol() << ")"
+				<< endl;
 	}
 }
