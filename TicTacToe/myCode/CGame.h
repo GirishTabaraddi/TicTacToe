@@ -37,7 +37,7 @@ private:
 
 	void m_symbolInit(EGameType gameType);
 
-	void m_checkResult();
+	void m_checkResult(CPlayer *currentPlayer);
 };
 
 #endif /* CGAME_H_ */

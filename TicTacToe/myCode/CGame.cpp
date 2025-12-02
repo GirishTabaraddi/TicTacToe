@@ -95,7 +95,7 @@ void CGame::m_switchPlayer()
 		m_currentPlayerIdx = 0;
 }
 
-void CGame::m_checkResult()
+void CGame::m_checkResult(CPlayer *currentPlayer)
 {
 	EGameResult resultStatus = m_board.checkWinStatus();
 
@@ -103,17 +103,19 @@ void CGame::m_checkResult()
 	{
 	case EGameResult::X_WINS:
 		m_display.printBoard(m_board);
-		cout << "Player X Wins!!!" << endl;
+		cout << endl << "Player-" << getCurrentPlayerIdx() << " X" <<
+				" (" << currentPlayer->getPlayerType() << ") Wins!!!" << endl;
 		m_isRunning = false;
 		break;
 	case EGameResult::O_WINS:
 		m_display.printBoard(m_board);
-		cout << "Player O Wins!!!" << endl;
+		cout << endl << "Player " << getCurrentPlayerIdx() << " O" <<
+				" (" << currentPlayer->getPlayerType() << ") Wins!!!" << endl;
 		m_isRunning = false;
 		break;
 	case EGameResult::DRAW:
 		m_display.printBoard(m_board);
-		cout << "Unfortunately it is a draw!!!" << endl;
+		cout << endl << "Unfortunately it is a draw!!!" << endl;
 		m_isRunning = false;
 		break;
 	default:
@@ -130,16 +132,15 @@ void CGame::playGame()
 
 		CPlayer *currentPlayer = m_players[m_currentPlayerIdx];
 
-		cout << endl << "Player " << currentPlayer->getSymbol() <<
+		cout << endl << "Player-" << getCurrentPlayerIdx() << " " << currentPlayer->getSymbol() <<
 				" (" << currentPlayer->getPlayerType() << ") turn:" << endl << endl;
 
-		Coordinates currentPlayerCoordinates = currentPlayer->decideMove(
-				m_board);
+		Coordinates currentPlayerCoordinates = currentPlayer->decideMove(m_board);
 
 		m_board.setCellValue(currentPlayerCoordinates.row,
 				currentPlayerCoordinates.col, currentPlayer->getSymbol());
 
-		m_checkResult();
+		m_checkResult(currentPlayer);
 
 		if (m_isRunning)
 		{
@@ -152,7 +153,7 @@ void CGame::printPlayerInfo() const
 {
 	for (unsigned int i = 0; i < 2; i++)
 	{
-		cout << endl << "Player " << i << ": " << m_players[i]->getPlayerType()
+		cout << endl << "Player-" << i << ": " << m_players[i]->getPlayerType()
 				<< " (" << m_players[i]->getSymbol() << ")"
 				<< endl;
 	}

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cstdlib>
 //! Add more standard header files as required
+#include <ctime>
 
 using namespace std;
 
@@ -19,6 +20,8 @@ int main ()
 
 void startTicTacToe()
 {
+	srand(time(0));
+
 	cout << "TicTacToe started." << endl << endl;
 
 	unsigned int boardSize = 3;
