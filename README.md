@@ -108,7 +108,7 @@ Draw an activity diagram describing the top level placeStone-Strategy for the co
 
 After spending a frustratingly large number of hours for creating the first design, you decide to hack the notebook from Nelly, the Nerd to check for his solution. You find the following design snippet:
 
-<add the class diagram as image or draw it>
+![UML Diagram](TicTacToe/UML&Doxygen/nellynerd_UML.png)
 
 Explain the following programming concepts (check with cplusplus.com or use a good textbook)
 
