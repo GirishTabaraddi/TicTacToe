@@ -48,13 +48,13 @@ From the requirements, identify the mentioned objects and describe them using th
 
 Create a first rough class design based on the results of the object oriented analysis. Methods and attributes can be ommitted.
 
-![UML Diagram](TicTacToe/UML&Doxygen/UML.jpg)
+![UML Diagram](TicTacToe/UML/UML.jpg)
 
 ### 1.4 Reuse
 
 Check the implementation of the Reversi Boardgrame and describe which classes can be reused. Provide a class diagram for every class you reuse and describe if changes are required.
 
-![Reversi UML Diagram](TicTacToe/UML&Doxygen/reversi_uml.jpg)
+![Reversi UML Diagram](TicTacToe/UML/reversi_uml.jpg)
 
 | Class    | Required Modifications |
 |:---------:|:----------:|
@@ -103,13 +103,13 @@ Draw the corresponding class diagram.
 
 Draw an activity diagram describing the top level placeStone-Strategy for the computer player.
 
-![UML Diagram](TicTacToe/UML&Doxygen/ActivityDiagram_ComputerAlgorithm.PNG)
+![UML Diagram](TicTacToe/UML/ActivityDiagram_ComputerAlgorithm.PNG)
 
 ### 2.2 Spooky Hierarchy
 
 After spending a frustratingly large number of hours for creating the first design, you decide to hack the notebook from Nelly, the Nerd to check for his solution. You find the following design snippet:
 
-![UML Diagram](TicTacToe/UML&Doxygen/nellynerd_UML.png)
+![UML Diagram](TicTacToe/UML/nellynerd_UML.png)
 
 
 #### Friend Class
@@ -270,7 +270,7 @@ Using these concepts, describe how you can implement the following feature:
 
 ### 3.1 Final UML Design of the Game
 
-![UML Diagram](TicTacToe/UML&Doxygen/Final_UML.jpg)
+![UML Diagram](TicTacToe/UML/Final_UML.jpg)
 
 ### 3.2 Output of the game
 
