@@ -1,0 +1,368 @@
+\chapter{Tic\+Tac\+Toe}
+\hypertarget{md__r_e_a_d_m_e}{}\label{md__r_e_a_d_m_e}\index{TicTacToe@{TicTacToe}}
+\label{md__r_e_a_d_m_e_autotoc_md0}%
+\Hypertarget{md__r_e_a_d_m_e_autotoc_md0}%
+ {\bfseries{Learning focus\+:}}
+
+Class Design, Class Diagrams, Activity Diagrams, Code Reuse, Static and Dynamic Polymorphism.
+
+The task is to develop an object oriented version of the game Tic\+Tac\+Toe.\hypertarget{md__r_e_a_d_m_e_autotoc_md1}{}\doxysection{\texorpdfstring{1 Class Relations}{1 Class Relations}}\label{md__r_e_a_d_m_e_autotoc_md1}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysubsection{\texorpdfstring{1.\+1 Requirements}{1.1 Requirements}}\label{md__r_e_a_d_m_e_autotoc_md2}
+The task is to develop a console based version of the board game Tic\+Tac\+Toe
+
+
+\begin{DoxyItemize}
+\item The game consists of a 3x3/4x4/5x5 board.
+\item On every position, the players place a “x” (player 1) or a “o” (Player 2) stone.
+\item The first player, who has 3 stones in a row (horizontally, vertically or diagonally) wins the game.
+\end{DoxyItemize}
+
+Technical requirements
+
+
+\begin{DoxyItemize}
+\item Player 1 and 2 can either be human or computer, i.\+e.
+\begin{DoxyEnumerate}
+\item Human against Computer
+\item Human against human
+\item Computer against human
+\item Computer against computer are possible combinations.
+\end{DoxyEnumerate}
+\item The computer may never loose.
+\item The board will be displayed as a console application.
+\item Displaying the screen later on in a graphical format shall be easily supported.
+\item Provide Doxy\+Gen Style comments for all entities and create a website for your project.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysubsection{\texorpdfstring{1.\+2 OO Analysis}{1.2 OO Analysis}}\label{md__r_e_a_d_m_e_autotoc_md3}
+From the requirements, identify the mentioned objects and describe them using the concept of OOA (object oriented analysis)
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Object   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Properties   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Capabilities    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Object   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Properties   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Capabilities    }\\\cline{1-3}
+\endhead
+\PBS\centering CGame   &\PBS\centering has one board (Composition), has two players (Composition), knows CDisplay (Association)   &\PBS\centering It controls the game, runs the loop for the game. Gets coordinates from CPlayer -\/\texorpdfstring{$>$}{>} validate pos -\/\texorpdfstring{$>$}{>} update board -\/\texorpdfstring{$>$}{>} if error, inform CDisplay    \\\cline{1-3}
+\PBS\centering CBoard   &\PBS\centering creates 3x3 board   &\PBS\centering checks the coordinates, checks for winner    \\\cline{1-3}
+\PBS\centering CDisplay   &\PBS\centering needs reference of the board   &\PBS\centering prints the board, prints Error\+Code    \\\cline{1-3}
+\PBS\centering CPlayer   &\PBS\centering uses CBoard   &\PBS\centering select\+Coordinate    \\\cline{1-3}
+\PBS\centering CHuman   &\PBS\centering inherits CPlayer   &\PBS\centering get\+Input(), places\+Stone    \\\cline{1-3}
+\PBS\centering CComputer   &\PBS\centering inherits CPlayer   &\PBS\centering calc\+Valid\+Pos(), places\+Stone    \\\cline{1-3}
+\PBS\centering CError\+Status   &\PBS\centering helper class   &\PBS\centering Enum with error codes required   \\\cline{1-3}
+\end{longtabu}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysubsection{\texorpdfstring{1.\+3 OO Design}{1.3 OO Design}}\label{md__r_e_a_d_m_e_autotoc_md4}
+Create a first rough class design based on the results of the object oriented analysis. Methods and attributes can be ommitted.
+
+\hypertarget{md__r_e_a_d_m_e_autotoc_md5}{}\doxysubsection{\texorpdfstring{1.\+4 Reuse}{1.4 Reuse}}\label{md__r_e_a_d_m_e_autotoc_md5}
+Check the implementation of the Reversi Boardgrame and describe which classes can be reused. Provide a class diagram for every class you reuse and describe if changes are required.
+
+
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Class   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Required Modifications    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Class   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Required Modifications    }\\\cline{1-2}
+\endhead
+\PBS\centering Reversi\+Board   &\PBS\centering Query\+Field\+State() can be reused    \\\cline{1-2}
+\PBS\centering Reversi\+Console\+View   &\PBS\centering print\+Board() can be reused   \\\cline{1-2}
+\end{longtabu}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md6}{}\doxysubsection{\texorpdfstring{1.\+5 Static Polymorphism}{1.5 Static Polymorphism}}\label{md__r_e_a_d_m_e_autotoc_md6}
+Draw a class diagram for a possible implementation of the Tic\+Tac\+Toe boardgame using static polymorphism for the Screen and Player partition.
+
+$<$to be drawn later$>$\hypertarget{md__r_e_a_d_m_e_autotoc_md7}{}\doxysubsection{\texorpdfstring{1.\+6 Dynamic Polymorphism}{1.6 Dynamic Polymorphism}}\label{md__r_e_a_d_m_e_autotoc_md7}
+The disadvantage of the static design is the missing flexibility of choosing computer / human players. Use dynamic polymorphism for both the screen and the players to support a code structure like the one below. Note, that inside the loop, we do not care if the player is a human or a computer, nor, what type of screen we have connected.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{void\ CTicTacToe::play()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ selectPlayer(0);}
+\DoxyCodeLine{\ \ \ \ selectPlayer(1);}
+\DoxyCodeLine{\ \ \ \ for\ (unsigned\ short\ i\ =\ 0;\ i\ <\ 9;\ i++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ cout\ <<\ "{}Placing\ a\ stone\ in\ round\ "{}\ <<\ i+1\ <<\ endl;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ bool\ finished\ =\ m\_player[i\%2]-\/>placeStone();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ m\_screen-\/>print();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ if\ (finished)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ "{}We\ have\ a\ winner!!!"{}\ <<\ endl;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ return;\ //hacky\ break}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ cout\ <<\ "{}Draw...."{}\ <<\ endl;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Draw the corresponding class diagram.
+
+$<$to be drawn later$>$\hypertarget{md__r_e_a_d_m_e_autotoc_md8}{}\doxysection{\texorpdfstring{2 Algorithms and Design Decisions}{2 Algorithms and Design Decisions}}\label{md__r_e_a_d_m_e_autotoc_md8}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md9}{}\doxysubsection{\texorpdfstring{2.\+1 Activity Diagram}{2.1 Activity Diagram}}\label{md__r_e_a_d_m_e_autotoc_md9}
+Draw an activity diagram describing the top level place\+Stone-\/\+Strategy for the computer player.
+
+\hypertarget{md__r_e_a_d_m_e_autotoc_md10}{}\doxysubsection{\texorpdfstring{2.\+2 Spooky Hierarchy}{2.2 Spooky Hierarchy}}\label{md__r_e_a_d_m_e_autotoc_md10}
+After spending a frustratingly large number of hours for creating the first design, you decide to hack the notebook from Nelly, the Nerd to check for his solution. You find the following design snippet\+:
+
+\hypertarget{md__r_e_a_d_m_e_autotoc_md11}{}\doxysubsubsection{\texorpdfstring{Friend Class}{Friend Class}}\label{md__r_e_a_d_m_e_autotoc_md11}
+A {\bfseries{Friend Class}} is a class that is granted special access to the {\bfseries{private}} and {\bfseries{protected}} members of another class. Under normal object-\/oriented rules, private data is hidden from outside classes. However, if Class A declares Class B as a {\ttfamily friend}, Class B can access Class A\textquotesingle{}s private variables and functions.
+
+{\bfseries{Key Characteristics\+:}}
+\begin{DoxyItemize}
+\item {\bfseries{Not Symmetric\+:}} If A is a friend of B, B is not automatically a friend of A.
+\item {\bfseries{Not Transitive\+:}} If A is a friend of B, and B is a friend of C, A is {\itshape not} automatically a friend of C.
+\item {\bfseries{Not Inherited\+:}} Friendships are not passed down to derived classes.
+\end{DoxyItemize}
+
+{\bfseries{Syntax\+:}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{class\ CStorage\ \{}
+\DoxyCodeLine{private:}
+\DoxyCodeLine{\ \ \ \ int\ m\_secretData\ =\ 42;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ //\ CStorage\ gives\ permission\ to\ CDisplay}
+\DoxyCodeLine{\ \ \ \ friend\ class\ CDisplay;\ }
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{class\ CDisplay\ \{}
+\DoxyCodeLine{public:}
+\DoxyCodeLine{\ \ \ \ void\ printSecret(const\ CStorage\&\ storage)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ //\ This\ works\ only\ because\ CDisplay\ is\ a\ friend!}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ std::cout\ <<\ storage.m\_secretData\ <<\ std::endl;\ }
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\};}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md12}{}\doxysubsubsection{\texorpdfstring{Static Attribute (\+Static Data Member)}{Static Attribute (Static Data Member)}}\label{md__r_e_a_d_m_e_autotoc_md12}
+A {\bfseries{Static Attribute}} is a variable that belongs to the {\bfseries{class itself}}, rather than to any specific object (instance) of that class. No matter how many objects of the class you create, there is only {\bfseries{one copy}} of the static variable in memory. All objects share this single variable.
+
+{\bfseries{Key Rules\+:}}
+\begin{DoxyItemize}
+\item {\bfseries{Shared Memory\+:}} Changing the value in one object changes it for all objects.
+\item {\bfseries{Initialization\+:}} Static members must be defined and initialized {\bfseries{outside}} the class definition (usually in the {\ttfamily .cpp} file) to allocate memory.
+\item {\bfseries{Lifetime\+:}} It exists for the entire duration of the program, initialized before {\ttfamily main()} runs.
+\end{DoxyItemize}
+
+{\bfseries{Syntax\+:}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#include\ <iostream>}
+\DoxyCodeLine{}
+\DoxyCodeLine{class\ Counter\ \{}
+\DoxyCodeLine{public:}
+\DoxyCodeLine{\ \ \ \ //\ Declaration\ inside\ the\ class}
+\DoxyCodeLine{\ \ \ \ static\ int\ objectCount;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Counter()\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ objectCount++;\ //\ Increment\ shared\ counter\ every\ time\ an\ object\ is\ born}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ Definition\ and\ Initialization\ OUTSIDE\ the\ class\ (Critical\ Step)}
+\DoxyCodeLine{int\ Counter::objectCount\ =\ 0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{int\ main()\ \{}
+\DoxyCodeLine{\ \ \ \ Counter\ c1;}
+\DoxyCodeLine{\ \ \ \ Counter\ c2;}
+\DoxyCodeLine{\ \ \ \ Counter\ c3;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ //\ Accessed\ via\ Class\ Name\ (preferred)\ or\ Object}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ "{}Total\ objects\ created:\ "{}\ <<\ Counter::objectCount\ <<\ std::endl;\ }
+\DoxyCodeLine{\ \ \ \ //\ Output:\ Total\ objects\ created:\ 3}
+\DoxyCodeLine{\ \ \ \ return\ 0;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md13}{}\doxysubsubsection{\texorpdfstring{Static Method}{Static Method}}\label{md__r_e_a_d_m_e_autotoc_md13}
+A {\bfseries{Static Method}} is a function that belongs to the class rather than an instance. It can be called without creating an object of the class.
+
+{\bfseries{Key Rules\+:}}
+\begin{DoxyItemize}
+\item {\bfseries{No {\ttfamily this} Pointer\+:}} Since it is not attached to an object, it does not have a {\ttfamily this} pointer.
+\item {\bfseries{Limited Access\+:}} A static method can {\bfseries{only}} access {\bfseries{Static Attributes}} or call other {\bfseries{Static Methods}}. It cannot access non-\/static (regular) member variables because it doesn\textquotesingle{}t know which object\textquotesingle{}s data to look at.
+\item {\bfseries{Invocation\+:}} Called using the scope resolution operator {\ttfamily Class\+Name\+::\+Method\+Name()}.
+\end{DoxyItemize}
+
+{\bfseries{Syntax\+:}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#include\ <iostream>}
+\DoxyCodeLine{}
+\DoxyCodeLine{class\ MathUtils\ \{}
+\DoxyCodeLine{public:}
+\DoxyCodeLine{\ \ \ \ static\ int\ add(int\ a,\ int\ b)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ return\ a\ +\ b;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ //\ This\ method\ cannot\ access\ non-\/static\ variables!}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{int\ main()\ \{}
+\DoxyCodeLine{\ \ \ \ //\ No\ need\ to\ create\ 'MathUtils\ m;'\ }
+\DoxyCodeLine{\ \ \ \ //\ We\ call\ the\ function\ directly\ on\ the\ class.}
+\DoxyCodeLine{\ \ \ \ int\ result\ =\ MathUtils::add(10,\ 5);}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ "{}Result:\ "{}\ <<\ result\ <<\ std::endl;\ //\ Output:\ Result:\ 15}
+\DoxyCodeLine{\ \ \ \ return\ 0;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ \hypertarget{md__r_e_a_d_m_e_autotoc_md14}{}\doxysubsubsection{\texorpdfstring{Throwing and Catching Exceptions}{Throwing and Catching Exceptions}}\label{md__r_e_a_d_m_e_autotoc_md14}
+Exception handling provides a way to transfer control from one part of a program to another when an error or "{}exceptional"{} situation occurs. It separates error-\/handling code from normal program logic.
+
+{\bfseries{Keywords\+:}}
+\begin{DoxyItemize}
+\item \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}{\ttfamily try}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\+: A block of code where exceptions might occur.
+\item \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}{\ttfamily throw}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\+: Used to signal that an error has occurred. You can throw integers, strings, or objects (like {\ttfamily std\+::exception}).
+\item \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}{\ttfamily catch}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\+: A block of code that handles the specific exception thrown.
+\end{DoxyItemize}
+
+{\bfseries{Key Rules\+:}}
+\begin{DoxyItemize}
+\item {\bfseries{Stack Unwinding\+:}} When an exception is thrown, the program leaves the current scope immediately. Local objects are destroyed (destructors are called) as the program looks for a {\ttfamily catch} block.
+\item {\bfseries{Handlers\+:}} You can have multiple {\ttfamily catch} blocks for different types of errors. {\ttfamily catch(...)} catches anything.
+\end{DoxyItemize}
+
+{\bfseries{Syntax\+:}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#include\ <iostream>}
+\DoxyCodeLine{\#include\ <stdexcept>\ //\ Standard\ exceptions}
+\DoxyCodeLine{}
+\DoxyCodeLine{double\ divide(double\ numerator,\ double\ denominator)\ \{}
+\DoxyCodeLine{\ \ \ \ if\ (denominator\ ==\ 0)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ //\ Signal\ an\ error}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ throw\ std::invalid\_argument("{}Error:\ Division\ by\ zero\ is\ not\ allowed."{});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ return\ numerator\ /\ denominator;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{int\ main()\ \{}
+\DoxyCodeLine{\ \ \ \ try\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ //\ Attempt\ risky\ code}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ double\ result\ =\ divide(10.0,\ 0.0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ std::cout\ <<\ "{}Result:\ "{}\ <<\ result\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \}\ }
+\DoxyCodeLine{\ \ \ \ catch\ (const\ std::invalid\_argument\&\ e)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ //\ Handle\ the\ specific\ error\ caught}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ std::cerr\ <<\ "{}Caught\ Exception:\ "{}\ <<\ e.what()\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ catch\ (...)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ //\ Handle\ any\ other\ unknown\ error}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ std::cerr\ <<\ "{}Caught\ unknown\ error."{}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ "{}Program\ continues..."{}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ return\ 0;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Using these concepts, describe how you can implement the following feature\+: \begin{DoxyVerb}- A CPosition object describes a specific position on the boardgame.
+- The CPosition Object knows the size of the board (number of rows and columns).
+- The size attribute may only be set by the CBoard class, while the board is being constructed.
+- If a CPosition object is constructed, whose value is out of the range of the board, the user will be informed so that he can initiate a proper error handling.
+\end{DoxyVerb}
+ \hypertarget{md__r_e_a_d_m_e_autotoc_md15}{}\doxysection{\texorpdfstring{3 Implementation and Test}{3 Implementation and Test}}\label{md__r_e_a_d_m_e_autotoc_md15}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md16}{}\doxysubsection{\texorpdfstring{3.\+1 Final UML Design of the Game}{3.1 Final UML Design of the Game}}\label{md__r_e_a_d_m_e_autotoc_md16}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md17}{}\doxysubsection{\texorpdfstring{3.\+2 Output of the game}{3.2 Output of the game}}\label{md__r_e_a_d_m_e_autotoc_md17}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{TicTacToe\ started.}
+\DoxyCodeLine{}
+\DoxyCodeLine{Choose\ the\ Game\ Type\ from\ below\ options:\ }
+\DoxyCodeLine{1.\ Human\ vs\ Human}
+\DoxyCodeLine{2.\ Human\ vs\ Computer}
+\DoxyCodeLine{3.\ Computer\ vs\ Computer}
+\DoxyCodeLine{3}
+\DoxyCodeLine{Enter\ TicTacToe\ Board\ Size\ (3,\ 4,\ or\ 5):\ 3}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Game\ Configuration\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{}
+\DoxyCodeLine{Type:\ Computer\ vs\ Computer}
+\DoxyCodeLine{}
+\DoxyCodeLine{Grid:\ 3x3}
+\DoxyCodeLine{}
+\DoxyCodeLine{Player-\/0:\ Computer\ (o)}
+\DoxyCodeLine{}
+\DoxyCodeLine{Player-\/1:\ Computer\ (x)}
+\DoxyCodeLine{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{}
+\DoxyCodeLine{.\ .\ .\ }
+\DoxyCodeLine{.\ .\ .\ }
+\DoxyCodeLine{.\ .\ .\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{Player-\/1\ x\ (Computer)\ turn:}
+\DoxyCodeLine{}
+\DoxyCodeLine{x\ .\ .\ }
+\DoxyCodeLine{.\ .\ .\ }
+\DoxyCodeLine{.\ .\ .\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{Player-\/0\ o\ (Computer)\ turn:}
+\DoxyCodeLine{}
+\DoxyCodeLine{x\ .\ .\ }
+\DoxyCodeLine{.\ o\ .\ }
+\DoxyCodeLine{.\ .\ .\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{Player-\/1\ x\ (Computer)\ turn:}
+\DoxyCodeLine{}
+\DoxyCodeLine{x\ x\ .\ }
+\DoxyCodeLine{.\ o\ .\ }
+\DoxyCodeLine{.\ .\ .\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{Player-\/0\ o\ (Computer)\ turn:}
+\DoxyCodeLine{}
+\DoxyCodeLine{x\ x\ o\ }
+\DoxyCodeLine{.\ o\ .\ }
+\DoxyCodeLine{.\ .\ .\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{Player-\/1\ x\ (Computer)\ turn:}
+\DoxyCodeLine{}
+\DoxyCodeLine{x\ x\ o\ }
+\DoxyCodeLine{.\ o\ .\ }
+\DoxyCodeLine{x\ .\ .\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{Player-\/0\ o\ (Computer)\ turn:}
+\DoxyCodeLine{}
+\DoxyCodeLine{x\ x\ o\ }
+\DoxyCodeLine{o\ o\ .\ }
+\DoxyCodeLine{x\ .\ .\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{Player-\/1\ x\ (Computer)\ turn:}
+\DoxyCodeLine{}
+\DoxyCodeLine{x\ x\ o\ }
+\DoxyCodeLine{o\ o\ x\ }
+\DoxyCodeLine{x\ .\ .\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{Player-\/0\ o\ (Computer)\ turn:}
+\DoxyCodeLine{}
+\DoxyCodeLine{x\ x\ o\ }
+\DoxyCodeLine{o\ o\ x\ }
+\DoxyCodeLine{x\ o\ .\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{Player-\/1\ x\ (Computer)\ turn:}
+\DoxyCodeLine{}
+\DoxyCodeLine{x\ x\ o\ }
+\DoxyCodeLine{o\ o\ x\ }
+\DoxyCodeLine{x\ o\ x\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{Unfortunately\ it\ is\ a\ draw!!!}
+\DoxyCodeLine{}
+\DoxyCodeLine{Game\ Ended!!!}
+
+\end{DoxyCode}
+ 
