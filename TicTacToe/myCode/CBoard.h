@@ -39,6 +39,8 @@ public:
 
 	void setCellValue(unsigned int row, unsigned int col, EBoardState value);
 
+	void resetCellValue(unsigned int row, unsigned int col);
+
 	EGameResult checkWinStatus();
 
 private:

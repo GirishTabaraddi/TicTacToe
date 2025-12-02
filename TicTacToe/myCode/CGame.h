@@ -34,6 +34,8 @@ private:
 	void m_switchPlayer();
 
 	void m_symbolInit(EGameType gameType);
+
+	void m_checkResult();
 };
 
 #endif /* CGAME_H_ */

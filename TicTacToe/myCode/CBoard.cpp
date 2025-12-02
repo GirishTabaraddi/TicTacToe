@@ -117,7 +117,7 @@ EGameResult CBoard::checkAllCols()
 
 	for (unsigned int cIdx = 0; cIdx < m_cols; cIdx++)
 	{
-		EBoardState firstCell = m_board[cIdx * m_cols];
+		EBoardState firstCell = m_board[cIdx];
 
 		if(firstCell == EBoardState::EMPTY) continue;
 
@@ -197,4 +197,9 @@ EGameResult CBoard::checkAllDiagonals()
 	}
 
 	return diagResult;
+}
+
+void CBoard::resetCellValue(unsigned int row, unsigned int col)
+{
+	m_board[(row * m_cols) + col] = EBoardState::EMPTY;
 }

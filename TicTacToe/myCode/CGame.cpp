@@ -7,6 +7,7 @@
 
 #include "CGame.h"
 #include <cstdlib>
+#include <iostream>
 
 using namespace std;
 
@@ -85,14 +86,58 @@ void CGame::m_symbolInit(EGameType gameType)
 
 }
 
-void CGame::playGame()
-{
-}
-
 void CGame::m_switchPlayer()
 {
 	if(m_currentPlayerIdx == 0) m_currentPlayerIdx = 1;
 	else m_currentPlayerIdx = 0;
 }
 
+void CGame::m_checkResult()
+{
+	EGameResult resultStatus = m_board.checkWinStatus();
 
+	switch(resultStatus)
+	{
+	case EGameResult::X_WINS:
+		m_display.printBoard(m_board);
+		cout << "Player X Wins!!!" << endl;
+		m_isRunning = false;
+		break;
+	case EGameResult::O_WINS:
+		m_display.printBoard(m_board);
+		cout << "Player O Wins!!!" << endl;
+		m_isRunning = false;
+		break;
+	case EGameResult::DRAW:
+		m_display.printBoard(m_board);
+		cout << "Unfortunately it is a draw!!!" << endl;
+		m_isRunning = false;
+		break;
+	default:
+		//! Game is still playing, do nothing
+		break;
+	}
+}
+
+void CGame::playGame()
+{
+	while(m_isRunning)
+	{
+		m_display.printBoard(m_board);
+
+		CPlayer* currentPlayer = m_players[m_currentPlayerIdx];
+
+		cout << endl << "Player " << currentPlayer->getSymbol() << "'s turn." << endl;
+
+		Coordinates currentPlayerCoordinates = currentPlayer->decideMove(m_board);
+
+		m_board.setCellValue(currentPlayerCoordinates.row, currentPlayerCoordinates.col, currentPlayer->getSymbol());
+
+		m_checkResult();
+
+		if(m_isRunning)
+		{
+			m_switchPlayer();
+		}
+	}
+}

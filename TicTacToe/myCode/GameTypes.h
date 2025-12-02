@@ -9,6 +9,7 @@
 #define GAMETYPES_H_
 
 #include <cctype>
+#include <iostream>
 
 enum class EBoardState : char
 {
@@ -42,5 +43,26 @@ enum class EGameResult
 	O_WINS,
 	DRAW
 };
+
+inline std::ostream& operator<<(std::ostream& lhs, const EBoardState& state)
+{
+	switch(state)
+	{
+	case EBoardState::EMPTY:
+		lhs << '.';
+		break;
+	case EBoardState::X:
+		lhs << 'x';
+		break;
+	case EBoardState::O:
+		lhs << 'o';
+		break;
+	default:
+		lhs << '?';
+		break;
+	}
+
+	return lhs;
+}
 
 #endif /* GAMETYPES_H_ */

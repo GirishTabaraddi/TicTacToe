@@ -47,7 +47,7 @@ Coordinates CHuman::decideMove(const CBoard &board)
 			continue;
 		}
 
-		cout << endl << "Enter row value (1-" << board.getCols() << "): ";
+		cout << endl << "Enter col value (1-" << board.getCols() << "): ";
 		cin >> inputCol;
 
 		if(cin.fail())
@@ -61,7 +61,7 @@ Coordinates CHuman::decideMove(const CBoard &board)
 		}
 
 		if(inputRow < 1 || inputRow > board.getRows()
-				|| inputCol < 1 || inputCol >= board.getCols())
+				|| inputCol < 1 || inputCol > board.getCols())
 		{
 			isOutOfBounds = true;
 			cout << "Error: Out of bounds." << endl;
