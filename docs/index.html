@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tic-Tac-Toe Wasm</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; text-align: center; background-color: #f4f4f4; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        
+        .controls { margin-bottom: 20px; padding: 10px; background: #eee; border-radius: 5px; }
+        select, button { padding: 8px 12px; margin: 5px; font-size: 1rem; }
+        
+        button:disabled { background-color: #ccc; cursor: not-allowed; }
+        #btn-start { background-color: #28a745; color: white; border: none; cursor: pointer; }
+        #btn-cancel { background-color: #dc3545; color: white; border: none; cursor: pointer; display: none; }
+        
+        #player-info { margin: 10px 0; font-weight: bold; color: #333; }
+        #turn-info { margin-bottom: 10px; color: #007bff; font-weight: bold; }
+        
+        #game-board { 
+            display: grid; 
+            gap: 5px; 
+            margin: 0 auto; 
+            background-color: #333; 
+            padding: 5px; 
+            border-radius: 5px;
+            width: max-content;
+            display: none; /* Hidden until start */
+        }
+        .cell { 
+            width: 80px; height: 80px; 
+            font-size: 2.5em; cursor: pointer; 
+            background-color: white; border: none;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .cell:hover { background-color: #f8f9fa; }
+        .x { color: #d9534f; }
+        .o { color: #5bc0de; }
+
+        #result-display { font-size: 2em; margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Tic-Tac-Toe (C++ Engine)</h1>
+
+        <div class="controls">
+            <label>Size:</label>
+            <select id="size" onchange="checkSelections()">
+                <option value="" disabled selected>Select Grid...</option>
+                <option value="3">3x3</option>
+                <option value="4">4x4</option>
+                <option value="5">5x5</option>
+            </select>
+
+            <label>Mode:</label>
+            <select id="mode" onchange="checkSelections()">
+                <option value="" disabled selected>Select Mode...</option>
+                <option value="1">Human vs Human</option>
+                <option value="2">Human vs Computer</option>
+                <option value="3">Computer vs Computer</option>
+            </select>
+            <br>
+            <button id="btn-start" onclick="startGame()" disabled>Start New Game</button>
+            <button id="btn-cancel" onclick="clearGame()">Clear Game</button>
+        </div>
+
+        <div id="player-info"></div>
+        <div id="turn-info"></div>
+        <div id="game-board"></div>
+        <div id="result-display"></div>
+    </div>
+
+    <script src="game.js"></script>
+
+    <script>
+        let gameInstance = null;
+        let cvcInterval = null;
+
+        // 1. Enable Start button only when both options selected
+        function checkSelections() {
+            const size = document.getElementById('size').value;
+            const mode = document.getElementById('mode').value;
+            document.getElementById('btn-start').disabled = !(size && mode);
+        }
+
+        // 2. Start Game Logic
+        function startGame() {
+            const size = parseInt(document.getElementById('size').value);
+            const mode = parseInt(document.getElementById('mode').value);
+
+            // Clean previous game
+            if (gameInstance) { gameInstance.delete(); clearInterval(cvcInterval); }
+
+            // Initialize C++
+            gameInstance = new Module.TicTacToe(size, mode);
+
+            // Update UI State
+            document.getElementById('game-board').style.display = 'grid';
+            document.getElementById('btn-start').style.display = 'none';
+            document.getElementById('btn-cancel').style.display = 'inline-block';
+            document.getElementById('size').disabled = true;
+            document.getElementById('mode').disabled = true;
+            document.getElementById('result-display').innerText = "";
+
+            // Get Player Symbols from C++
+            document.getElementById('player-info').innerText = gameInstance.getPlayerInfo();
+
+            renderGrid(size);
+            updateStatus();
+
+            // CHECK: Is it Computer's turn immediately? (e.g. Random X start)
+            if(gameInstance.isComputerTurn()) {
+                if(mode === 3) {
+                    // CvC: Start Auto Loop
+                    startCvCLoop();
+                } else {
+                    // HvC: Trigger first move after slight delay for UX
+                    setTimeout(() => {
+                         let res = gameInstance.computerStep();
+                         processResult(res);
+                    }, 500);
+                }
+            }
+        }
+
+        // 3. Cancel Logic
+        function clearGame() {
+            if (gameInstance) {
+                gameInstance.delete();
+                gameInstance = null;
+            }
+            clearInterval(cvcInterval);
+
+            // Reset UI
+            document.getElementById('game-board').innerHTML = '';
+            document.getElementById('game-board').style.display = 'none';
+            document.getElementById('player-info').innerText = '';
+            document.getElementById('turn-info').innerText = '';
+            document.getElementById('result-display').innerText = '';
+
+            document.getElementById('btn-start').style.display = 'inline-block';
+            document.getElementById('btn-cancel').style.display = 'none';
+            document.getElementById('size').disabled = false;
+            document.getElementById('mode').disabled = false;
+            
+            // Reset dropdowns to "Select..."
+            document.getElementById('size').value = "";
+            document.getElementById('mode').value = "";
+            checkSelections(); // Disables start button
+        }
+
+        // 4. Render Grid Buttons
+        function renderGrid(size) {
+            const board = document.getElementById('game-board');
+            board.innerHTML = '';
+            board.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+
+            for(let r=0; r<size; r++) {
+                for(let c=0; c<size; c++) {
+                    let btn = document.createElement('button');
+                    btn.className = 'cell';
+                    btn.onclick = () => handleHumanClick(r, c);
+                    btn.id = `c-${r}-${c}`;
+                    board.appendChild(btn);
+                }
+            }
+        }
+
+        // 5. Handle Human Click
+        function handleHumanClick(r, c) {
+            if(!gameInstance) return;
+
+            let result = gameInstance.clickCell(r, c);
+            if(result === "INVALID" || result === "WAITING_FOR_COMPUTER") return;
+
+            processResult(result);
+        }
+
+        // 6. CvC Loop
+        function startCvCLoop() {
+            cvcInterval = setInterval(() => {
+                if(!gameInstance) return;
+                
+                let result = gameInstance.computerStep();
+                processResult(result);
+
+                if(result !== "PLAYING") {
+                    clearInterval(cvcInterval);
+                }
+            }, 1000); // 1 Second delay between moves
+        }
+
+        // 7. Common Update Logic
+        function processResult(result) {
+            updateBoardDisplay();
+            
+            if(result !== "PLAYING") {
+                document.getElementById('turn-info').innerText = "";
+                let msg = "";
+                if(result === "X_WINS") msg = "Player X Wins!";
+                if(result === "O_WINS") msg = "Player O Wins!";
+                if(result === "DRAW") msg = "It's a Draw!";
+                
+                document.getElementById('result-display').innerText = msg;
+                clearInterval(cvcInterval); // Stop CvC if running
+            } else {
+                updateStatus();
+            }
+        }
+
+        function updateStatus() {
+            if(gameInstance) {
+                document.getElementById('turn-info').innerText = gameInstance.getCurrentTurnInfo();
+            }
+        }
+
+        function updateBoardDisplay() {
+            let state = gameInstance.getBoardState();
+            let cells = document.getElementsByClassName('cell');
+
+            for(let i=0; i<state.length; i++) {
+                let char = state[i];
+                let cell = cells[i];
+                if(char === 'x') {
+                    cell.innerText = 'X';
+                    cell.classList.add('x');
+                } else if (char === 'o') {
+                    cell.innerText = 'O';
+                    cell.classList.add('o');
+                } else {
+                    cell.innerText = '';
+                    cell.classList.remove('x', 'o');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
