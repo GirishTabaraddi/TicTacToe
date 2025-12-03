@@ -23,6 +23,8 @@
  */
 class CGame
 {
+    friend class WasmGameAdapter;
+
 private:
     /*!
      * @brief The Game Board (Model).

@@ -9,6 +9,9 @@ using namespace std;
 //! Add your project's header files here
 #include "CGame.h"
 
+// This entire block is IGNORED when compiling for WebAssembly
+#ifndef __EMSCRIPTEN__
+
 void startTicTacToe();
 
 int main ()
@@ -123,3 +126,5 @@ void startTicTacToe()
 
 	cout << endl << "Game Ended!!!" << endl;
 }
+
+#endif
