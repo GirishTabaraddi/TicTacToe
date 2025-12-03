@@ -85,7 +85,7 @@ For detailed documentation regarding:
   * Algorithms (Minimax/Activity Diagrams)
   * Assignment Questions (Class Relations, Reuse)
 
-👉 **[Click here to read the detailed DESIGN.md](../TicTacToe/DESIGN.md)**
+👉 **[Click here to read the detailed Design Report](TicTacToe/README.md)**
 
 -----
 
