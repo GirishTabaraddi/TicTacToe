@@ -357,3 +357,113 @@ Unfortunately it is a draw!!!
 
 Game Ended!!!
 ```
+
+## 4 Tic-Tac-Toe WebAssembly (Wasm) Port
+
+This project module allows the C++ Tic-Tac-Toe engine to run directly in a web browser using WebAssembly. It utilizes **Emscripten** to compile the C++ logic into a `.wasm` binary that interacts with JavaScript via a frontend HTML interface.
+
+### 4.1 Repository Structure
+
+The web build relies on specific file locations. Based on this repository setup:
+
+* **`TicTacToe/myCode/`**: Contains the C++ source code, the HTML frontend, and the build script.
+    * `WasmEntry.cpp`: The bridge between C++ and JavaScript.
+    * `index.html`: The graphical user interface.
+    * `run_web.bat`: Automation script to build and serve the app.
+* **`emsdk/`**: The Emscripten SDK toolchain (located parallel to the `TicTacToe` folder).
+
+### 4.2 Prerequisites
+
+Before running the web version, ensure you have:
+
+1.  **Python 3.x**: Required to run the local web server.
+    * Verify by running: `python --version`
+2.  **Web Browser**: Chrome, Edge, Firefox, or Safari (Wasm is supported in all modern browsers).
+3.  **Windows OS**: The provided automation script (`run_web.bat`) is written for Windows.
+
+---
+
+### 4.3 How to Run (Quick Start)
+
+There is a "One-Click" batch script that handles environment activation, compilation, and server hosting.
+
+1.  Run the web launcher script:
+    ```cmd
+    run_web.bat
+    ```
+
+### 4.4 What the script does:
+1.  **Activates EMSDK**: It looks for the `emsdk` folder in the repo root and activates the compiler environment variables for the current session.
+2.  **Compiles**: It runs the `emcc` compiler to generate `game.js` and `game.wasm`.
+3.  **Launches Browser**: It opens `http://localhost:8000/index.html`.
+4.  **Starts Server**: It spins up a Python HTTP server to host the files.
+
+> **Note:** Do not close the terminal window while playing. Closing it will stop the local web server.
+
+---
+
+### 4.5 Manual Build Instructions
+
+If you prefer to compile manually or are debugging the build process, follow these steps:
+
+#### 1. Activate Emscripten
+From the repo root, run the environment script:
+```cmd
+..\emsdk\emsdk_env.bat
+````
+
+#### 2. Compile Command
+
+Run this command from inside the `TicTacToe\myCode` folder:
+
+```bash
+emcc -O3 --bind -o game.js ^
+    WasmEntry.cpp CGame.cpp CBoard.cpp CPlayer.cpp CHuman.cpp CComputer.cpp CDisplay.cpp ^
+    -s ALLOW_MEMORY_GROWTH=1 ^
+    -s NO_EXIT_RUNTIME=1
+```
+
+  * `-O3`: Maximizes optimization for speed.
+  * `--bind`: Enables **Embind**, allowing C++ classes (`WasmGameAdapter`) to be called from JavaScript.
+  * `-s NO_EXIT_RUNTIME=1`: Ensures the C++ memory stays alive after initialization so the buttons continue to work.
+
+#### 3. Serve
+
+Start a local server in the directory:
+
+```bash
+python -m http.server 8000
+```
+
+-----
+
+### 4.6 How to Use the Web App
+
+1.  **Configuration**:
+      * Select **Grid Size** (3x3, 4x4, or 5x5).
+      * Select **Game Mode** (Human vs Human, Human vs Computer, or Computer vs Computer).
+2.  **Start**: Click the **"Start New Game"** button.
+3.  **Gameplay**:
+      * **HvC**: Click a cell to make your move. The AI will respond instantly (Minimax for 3x3, Random for larger grids).
+      * **CvC**: The game will enter an automatic loop where the AI plays against itself every second.
+4.  **Reset**: Click **"Clear Game"** to stop the current match and change settings.
+
+-----
+
+### 4.7 Technical Architecture
+
+#### WasmEntry.cpp
+
+Since the browser is event-driven (waiting for user clicks), we cannot use the standard `cin`/`while` loop found in `main.cpp`.
+
+The created wrapper class **`WasmGameAdapter`** bridges the gap:
+
+  * **Persistence**: It holds a pointer to `CGame` on the heap, keeping the game state alive between browser clicks.
+  * **Methods**:
+      * `clickCell(row, col)`: Handles input, updates the board, checks for wins, and triggers the AI turn.
+      * `computerStep()`: Exposed specifically for the CvC loop logic.
+      * `getBoardState()`: Returns a string representation of the grid (e.g., `"x..o.x..."`) for efficient UI rendering.
+
+<!-- end list -->
+
+```
