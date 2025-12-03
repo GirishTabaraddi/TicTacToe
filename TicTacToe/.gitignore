@@ -1,1 +1,17 @@
-/Debug/
+# Build directories
+build/
+bin/
+Debug/
+Release/
+
+# WebAssembly outputs 
+/myCode/*.wasm
+/myCode/*.js
+/myCode/*.html.mem
+
+.idea/
+*.suo
+*.user
+.settings/
+.cproject
+.project
